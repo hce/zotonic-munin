@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import re
+import subprocess
+import sys
+import traceback
+
+try:
+	params = sys.argv[0].rsplit("/", 1)[1].split("_", 3)
+	instance = params[2]
+except:
+	print "Usage: %s_ZOTONICINSTANCE" % sys.argv[0]
+	sys.exit(1)
+
+if (len(sys.argv) > 1) and (sys.argv[1] == "config"):
+	print """graph_title Zotonic etop
+graph_category awi
+graph_info etop for zotonic
+numprocs.label Number of Erlang processes
+numprocs.draw LINE2"""
+else:
+	Val_cmd = 'lists:flatten(io_lib:format("~w", [[length(processes())]])).\n'
+	P = subprocess.Popen(["erl_call", "-e", "-n", instance], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	(Res, Ign) = P.communicate(Val_cmd)
+	Match = re.search("\\{ok, \"\\[([0-9,]*)\\]\"\\}", Res)
+	if not Match:
+		print "Error: %s" % "; ".join(r for r in [Res, Ign] if r)
+		sys.exit(1)
+	Values = [int(i) for i in Match.groups()[0].split(",")]
+	numprocs = Values[0]
+	print "numprocs.value %d" % numprocs

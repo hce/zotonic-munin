@@ -6,7 +6,7 @@ zotonic_PLUGINTYPE_ZOTONICINSTANCENAME[_ADDITIONALPARAMETERS]
 Where PLUGINTYPE is the name of the plugin, currently the following
 ones are available:
 
-zotonic_numprocesses       * Show the number of erlang processes
+zotonic_numprocs           * Show the number of erlang processes
 zotonic_vmmemstats         * Various memory usage values of the VM
 zotonic_sesscount          * Number of active user sessions for sites
 
@@ -31,5 +31,13 @@ Example: (Zotonic instance is called zotonic001, The three sites are called
 myblog, myshop and companywebsite)
 
     ln -s zotonic_sesscount zotonic_sesscount_zotonic001_myblog_myshop_companywebsite
+
+==== zotonic_sesscount ====
+Parameter: zotonic-instance
+
+Example: (Zotonic instance is called zotonic001)
+
+    ln -s zotonic_numprocs zotonic_numprocs_zotonic001
+
 
 Questions? Hans-Christian Esperer <hc-zotonicmunin@hcesperer.org>
