@@ -20,7 +20,7 @@ graph_category awi
 graph_info This graph shows how many active zotonic sessions exist for various sites"""
 	for site in sites:
 		print """%s.label %s
-%s.draw LINE2""" % (site, site)
+%s.draw LINE2""" % (site, site, site)
 else:
 	Val_cmd = 'lists:flatten(io_lib:format("~w", [[z_session_manager:count(z:c(Type)) || Type <- [' + ', '.join(sites) + ']]])).\n'
 	P = subprocess.Popen(["erl_call", "-e", "-n", instance], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
