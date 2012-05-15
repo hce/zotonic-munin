@@ -1,0 +1,13 @@
+Some easy-to-use zotonic plugins for munin. To use, copy to the munin
+plugin directory and link them like this:
+
+zotonic_PLUGINTYPE_ZOTONICINSTANCENAME[_ADDITIONALPARAMETERS]
+
+Where PLUGINTYPE is the name of the plugin, currently the following
+ones are available:
+
+zotonic_numprocesses       * Show the number of erlang processes
+zotonic_vmmemstats         * Various memory usage values of the VM
+zotonic_sesscount          * Number of active user sessions for sites
+
+Questions? Hans-Christian Esperer <hc-zotonicmunin@hcesperer.org>
