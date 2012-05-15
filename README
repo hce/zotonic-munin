@@ -10,4 +10,18 @@ zotonic_numprocesses       * Show the number of erlang processes
 zotonic_vmmemstats         * Various memory usage values of the VM
 zotonic_sesscount          * Number of active user sessions for sites
 
+Make sure erl_call is in your path. If it doesn't, try: ln -s
+/usr/local/lib/erlang/lib/erl_interface-3.7.6/bin/erl_call /usr/local/bin
+(Where /usr/local might be just /usr or something entirely different,
+depending on your installation,...)
+
+Add the following lines to your munin-node.conf:
+    [zotonic*]
+    user zotonic
+    env.HOME /home/zotonic
+
+(Replace zotonic with the user your zotonic instance runs as, of
+course.  env.HOME must point to the directory where the correct erlang
+cookie file resides)
+
 Questions? Hans-Christian Esperer <hc-zotonicmunin@hcesperer.org>
