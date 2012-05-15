@@ -16,7 +16,7 @@ except:
 
 if (len(sys.argv) > 1) and (sys.argv[1] == "config"):
 	print """graph_title Zotonic Sessions
-graph_category awi
+graph_category zotonic
 graph_info This graph shows how many active zotonic sessions exist for various sites"""
 	for site in sites:
 		print """%s.label %s

@@ -14,7 +14,7 @@ except:
 
 if (len(sys.argv) > 1) and (sys.argv[1] == "config"):
 	print """graph_title Zotonic etop
-graph_category awi
+graph_category zotonic
 graph_info etop for zotonic
 numprocs.label Number of Erlang processes
 numprocs.draw LINE2"""
