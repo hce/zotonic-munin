@@ -24,4 +24,12 @@ Add the following lines to your munin-node.conf:
 course.  env.HOME must point to the directory where the correct erlang
 cookie file resides)
 
+==== zotonic_sesscount ====
+Parameters: zotonic-instance site1 [site2 [site3]]
+
+Example: (Zotonic instance is called zotonic001, The three sites are called
+myblog, myshop and companywebsite)
+
+    ln -s zotonic_sesscount zotonic_sesscount_zotonic001_myblog_myshop_companywebsite
+
 Questions? Hans-Christian Esperer <hc-zotonicmunin@hcesperer.org>

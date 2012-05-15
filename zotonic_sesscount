@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import re
+import subprocess
+import sys
+import traceback
+
+try:
+	params = sys.argv[0].rsplit("/", 1)[1].split("_", 3)
+	instance = params[2]
+	sites = params[3].split("_")
+except:
+	print "Usage: %s_ZOTONICINSTANCE_SITE1_SITE2_..._SITEn" % sys.argv[0]
+	sys.exit(1)
+
+
+if (len(sys.argv) > 1) and (sys.argv[1] == "config"):
+	print """graph_title Zotonic Sessions
+graph_category awi
+graph_info This graph shows how many active zotonic sessions exist for various sites"""
+	for site in sites:
+		print """%s.label %s
+%s.draw LINE2""" % (site, site)
+else:
+	Val_cmd = 'lists:flatten(io_lib:format("~w", [[z_session_manager:count(z:c(Type)) || Type <- [' + ', '.join(sites) + ']]])).\n'
+	P = subprocess.Popen(["erl_call", "-e", "-n", instance], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	(Res, Ign) = P.communicate(Val_cmd)
+	Match = re.search("\\{ok, \"\\[([0-9,]*)\\]\"\\}", Res)
+	if not Match:
+		print "Error: %s" % "; ".join(r for r in [Res, Ign] if r)
+		sys.exit(1)
+	Values = [int(i) for i in Match.groups()[0].split(",")]
+	for site, Value in zip(sites, Values):
+		print "%s.value %d" % (site, Value)
